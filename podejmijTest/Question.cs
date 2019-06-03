@@ -8,18 +8,14 @@ namespace podejmijTest
 {
     class Question
     {
-        uint id;
-        string text;
-        List<Answer> answers;
-        public Question(uint id, string text,List<Answer> answers)
+        public uint Id { get; set; }
+        public string Text { get; set; }
+        public List<Answer> Answers { get; } //get
+        public Question(uint id, string text)
         {
-            this.id = id;
-            this.text = text;
-            this.answers = new List<Answer>();
-            foreach (var answer in answers)
-            {
-                this.answers.Add(answer);
-            }
+            Id = id;
+            Text = text;
+            Answers = new List<Answer>();
         }
     }
 }

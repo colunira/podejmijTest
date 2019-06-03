@@ -8,22 +8,26 @@ namespace podejmijTest
 {
     class Test
     {
-        string level;
-        string author;
-        string title;
-        byte time;
-        List<Question> questions;
-        public Test(string level, string author, string title, byte time, List<Question> questions)
+        public string Level { get; } 
+        public string Author { get; } 
+        public string Title { get; } 
+        public byte Time { get; } 
+        public List<Question> Questions { get; } //get
+        public Test()
         {
-            this.level = level;
-            this.author = author;
-            this.title = title;
-            this.time = time;
-            this.questions = new List<Question>();
-            foreach(var q in questions)
-            {
-                this.questions.Add(q);
-            }
+            Level = "";
+            Author = "";
+            Title = "";
+            Time = 0;
+            List<Question> questions = new List<Question>();
+        }
+        public Test(string level, string author, string title, byte time)
+        {
+            Level = level;
+            Author = author;
+            Title = title;
+            Time = time;
+            Questions = new List<Question>();
         }
     }
 }

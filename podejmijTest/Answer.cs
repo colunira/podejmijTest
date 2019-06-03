@@ -8,12 +8,14 @@ namespace podejmijTest
 {
     class Answer
     {
-        uint id;
-        bool correct;
-        public Answer(uint id, bool correct)
+        public uint Id { get; set; }
+        public bool Correct { get; set; }
+        public string Text { get; set; }
+        public Answer(uint id, bool correct, string text)
         {
-            this.id = id;
-            this.correct = correct;
+            Id = id;
+            Correct = correct;
+            Text = text;
         }
     }
 }

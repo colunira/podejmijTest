@@ -15,11 +15,20 @@ namespace podejmijTest
             this.view = view;
             this.model = model;
             view.ReadXML += View_ReadXML;
+            view.GetTestProperties += View_GetTestProperties;
         }
 
-        private void View_ReadXML()
+        private void View_GetTestProperties()
         {
-            model.readXML();
+            view.TestName = model.ReturnTestName;
+            view.Level = model.ReturnTestLevel;
+            view.Author = model.ReturnTestAuthor;
+            view.Time = model.ReturnTestTime.ToString();
+        }
+
+        private void View_ReadXML(string path)
+        {
+            model.readXML(path);
         }
     }
 }

@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace podejmijTest
 {
-    interface IView
+    public interface IView
     {
-        event Action ReadXML;
+        string TestName { set; }
+        string Level { set; }
+        string Author { set; }
+        string Time { set; }
+        event Action<string> ReadXML;
+        event Action GetTestProperties;
     }
 }
