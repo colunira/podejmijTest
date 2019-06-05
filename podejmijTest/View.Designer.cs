@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.startB = new System.Windows.Forms.Button();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
+            this.answersCheckedBox = new System.Windows.Forms.CheckedListBox();
+            this.questionTextL = new System.Windows.Forms.Label();
+            this.questionNumberL = new System.Windows.Forms.Label();
+            this.previousB = new System.Windows.Forms.Button();
+            this.nextB = new System.Windows.Forms.Button();
+            this.finishB = new System.Windows.Forms.Button();
+            this.timeLeftL = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.chooseFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.chooseTestB = new System.Windows.Forms.Button();
@@ -43,10 +44,12 @@
             this.levelL = new System.Windows.Forms.Label();
             this.authorL = new System.Windows.Forms.Label();
             this.timeL = new System.Windows.Forms.Label();
+            this.timerSec = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // startB
             // 
+            this.startB.Enabled = false;
             this.startB.Location = new System.Drawing.Point(60, 121);
             this.startB.Margin = new System.Windows.Forms.Padding(4);
             this.startB.Name = "startB";
@@ -56,67 +59,74 @@
             this.startB.UseVisualStyleBackColor = true;
             this.startB.Click += new System.EventHandler(this.buttonStart_Click);
             // 
-            // checkedListBox1
+            // answersCheckedBox
             // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(429, 143);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(308, 123);
-            this.checkedListBox1.TabIndex = 4;
+            this.answersCheckedBox.CheckOnClick = true;
+            this.answersCheckedBox.FormattingEnabled = true;
+            this.answersCheckedBox.Location = new System.Drawing.Point(429, 143);
+            this.answersCheckedBox.Name = "answersCheckedBox";
+            this.answersCheckedBox.Size = new System.Drawing.Size(308, 123);
+            this.answersCheckedBox.TabIndex = 4;
             // 
-            // label2
+            // questionTextL
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(519, 73);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 17);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Treść pytania";
+            this.questionTextL.AutoSize = true;
+            this.questionTextL.Location = new System.Drawing.Point(519, 73);
+            this.questionTextL.Name = "questionTextL";
+            this.questionTextL.Size = new System.Drawing.Size(94, 17);
+            this.questionTextL.TabIndex = 5;
+            this.questionTextL.Text = "Treść pytania";
             // 
-            // label3
+            // questionNumberL
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(529, 45);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 17);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Pytanie ../x";
+            this.questionNumberL.AutoSize = true;
+            this.questionNumberL.Location = new System.Drawing.Point(529, 45);
+            this.questionNumberL.Name = "questionNumberL";
+            this.questionNumberL.Size = new System.Drawing.Size(96, 17);
+            this.questionNumberL.TabIndex = 6;
+            this.questionNumberL.Text = "Pytanie nr 0/0";
             // 
-            // button1
+            // previousB
             // 
-            this.button1.Location = new System.Drawing.Point(356, 183);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(44, 35);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "←";
-            this.button1.UseVisualStyleBackColor = true;
+            this.previousB.Enabled = false;
+            this.previousB.Location = new System.Drawing.Point(356, 183);
+            this.previousB.Name = "previousB";
+            this.previousB.Size = new System.Drawing.Size(44, 35);
+            this.previousB.TabIndex = 7;
+            this.previousB.Text = "←";
+            this.previousB.UseVisualStyleBackColor = true;
+            this.previousB.Click += new System.EventHandler(this.previousB_Click);
             // 
-            // button2
+            // nextB
             // 
-            this.button2.Location = new System.Drawing.Point(772, 183);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(33, 35);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "→";
-            this.button2.UseVisualStyleBackColor = true;
+            this.nextB.Enabled = false;
+            this.nextB.Location = new System.Drawing.Point(772, 183);
+            this.nextB.Name = "nextB";
+            this.nextB.Size = new System.Drawing.Size(33, 35);
+            this.nextB.TabIndex = 8;
+            this.nextB.Text = "→";
+            this.nextB.UseVisualStyleBackColor = true;
+            this.nextB.Click += new System.EventHandler(this.nextB_Click);
             // 
-            // button3
+            // finishB
             // 
-            this.button3.Location = new System.Drawing.Point(532, 323);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 9;
-            this.button3.Text = "Zakończ test";
-            this.button3.UseVisualStyleBackColor = true;
+            this.finishB.Enabled = false;
+            this.finishB.Location = new System.Drawing.Point(532, 309);
+            this.finishB.Name = "finishB";
+            this.finishB.Size = new System.Drawing.Size(75, 45);
+            this.finishB.TabIndex = 9;
+            this.finishB.Text = "Zakończ test";
+            this.finishB.UseVisualStyleBackColor = true;
+            this.finishB.Click += new System.EventHandler(this.finishB_Click);
             // 
-            // label4
+            // timeLeftL
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(519, 365);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(111, 17);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Czas pozostały: ";
+            this.timeLeftL.AutoSize = true;
+            this.timeLeftL.Location = new System.Drawing.Point(519, 365);
+            this.timeLeftL.Name = "timeLeftL";
+            this.timeLeftL.Size = new System.Drawing.Size(119, 17);
+            this.timeLeftL.TabIndex = 10;
+            this.timeLeftL.Text = "Czas pozostały: ∞";
             // 
             // label5
             // 
@@ -130,6 +140,7 @@
             // chooseFileDialog
             // 
             this.chooseFileDialog.DefaultExt = "xml";
+            this.chooseFileDialog.Filter = "xml files (*.xml)|*.xml";
             this.chooseFileDialog.Title = "Wybierz plik xml zawierający test";
             this.chooseFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.chooseFileDialog_FileOk);
             // 
@@ -149,10 +160,8 @@
             this.testNameL.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.testNameL.Location = new System.Drawing.Point(108, 192);
             this.testNameL.Name = "testNameL";
-            this.testNameL.Size = new System.Drawing.Size(54, 17);
+            this.testNameL.Size = new System.Drawing.Size(0, 17);
             this.testNameL.TabIndex = 13;
-            this.testNameL.Text = "Tytuł: ";
-            this.testNameL.Visible = false;
             // 
             // levelL
             // 
@@ -162,7 +171,6 @@
             this.levelL.Size = new System.Drawing.Size(62, 17);
             this.levelL.TabIndex = 14;
             this.levelL.Text = "Poziom: ";
-            this.levelL.Visible = false;
             // 
             // authorL
             // 
@@ -172,7 +180,6 @@
             this.authorL.Size = new System.Drawing.Size(46, 17);
             this.authorL.TabIndex = 15;
             this.authorL.Text = "Autor:";
-            this.authorL.Visible = false;
             // 
             // timeL
             // 
@@ -182,7 +189,6 @@
             this.timeL.Size = new System.Drawing.Size(43, 17);
             this.timeL.TabIndex = 16;
             this.timeL.Text = "Czas:";
-            this.timeL.Visible = false;
             // 
             // View
             // 
@@ -195,13 +201,13 @@
             this.Controls.Add(this.testNameL);
             this.Controls.Add(this.chooseTestB);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.checkedListBox1);
+            this.Controls.Add(this.timeLeftL);
+            this.Controls.Add(this.finishB);
+            this.Controls.Add(this.nextB);
+            this.Controls.Add(this.previousB);
+            this.Controls.Add(this.questionNumberL);
+            this.Controls.Add(this.questionTextL);
+            this.Controls.Add(this.answersCheckedBox);
             this.Controls.Add(this.startB);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "View";
@@ -214,13 +220,13 @@
         #endregion
 
         private System.Windows.Forms.Button startB;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckedListBox answersCheckedBox;
+        private System.Windows.Forms.Label questionTextL;
+        private System.Windows.Forms.Label questionNumberL;
+        private System.Windows.Forms.Button previousB;
+        private System.Windows.Forms.Button nextB;
+        private System.Windows.Forms.Button finishB;
+        private System.Windows.Forms.Label timeLeftL;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.OpenFileDialog chooseFileDialog;
         private System.Windows.Forms.Button chooseTestB;
@@ -228,6 +234,7 @@
         private System.Windows.Forms.Label levelL;
         private System.Windows.Forms.Label authorL;
         private System.Windows.Forms.Label timeL;
+        private System.Windows.Forms.Timer timerSec;
     }
 }
 
